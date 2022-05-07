@@ -1,5 +1,6 @@
 package com.strands.interviews.eventsystem;
 
+import com.strands.interviews.eventsystem.events.CreationEvent;
 import com.strands.interviews.eventsystem.events.SimpleEvent;
 import com.strands.interviews.eventsystem.events.SubEvent;
 import com.strands.interviews.eventsystem.impl.DefaultEventManager;
@@ -121,5 +122,22 @@ public class DefaultEventManagerTest
         eventManager.registerListener("some.key", eventListenerMock);
         eventManager.publishEvent(new SubEvent(this));
         assertFalse(eventListenerMock.isCalled());
+    }
+
+    /**
+     * Check that when a new event listener is added, if it returns an empty array when the
+     * “getHandledEvent-Classes" method was called, this event listener listens all events in the system.
+     */
+    @Test
+    public void testListenEverything()
+    {
+        EventListenerMock eventListenerMock = new EventListenerMock(new Class[]{});
+        eventManager.registerListener("some.key", eventListenerMock);
+        eventManager.publishEvent(new CreationEvent(this));
+        assertTrue(eventListenerMock.isCalled());
+        eventManager.publishEvent(new SimpleEvent(this));
+        assertTrue(eventListenerMock.isCalled());
+        eventManager.publishEvent(new SubEvent(this));
+        assertTrue(eventListenerMock.isCalled());
     }
 }
