@@ -5,7 +5,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     <groupId>com.strands.interview</groupId>
     <artifactId>eventsystem</artifactId>
     <name>Strands Events Coding Test</name>
-    <version>1.02-SNAPSHOT</version>
+    <version>1.03-SNAPSHOT</version>
     <description>The event system coding test</description>
     <dependencies>
         <dependency>
